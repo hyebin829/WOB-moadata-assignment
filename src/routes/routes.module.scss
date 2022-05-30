@@ -1,0 +1,9 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

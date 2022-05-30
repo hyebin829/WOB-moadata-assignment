@@ -1,0 +1,23 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.container {
+  @include flexbox.flexbox(center, center);
+  flex-direction: column;
+  height: 660px;
+  padding: 20px;
+  font-style: italic;
+  user-select: none;
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size: 18px;
+    color: colors.$BLACK;
+  }
+}
