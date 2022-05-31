@@ -1,48 +1,21 @@
+import { ReactNode } from 'react'
+import cx from 'classnames'
+
+import styles from './button.module.scss'
+
 interface IButtonProps {
   type: 'button' | 'submit' | 'reset'
-  margin?: string
-  text?: string
-  width?: string
-  height?: string
-  fontSize?: string
-  border?: string
-  borderRadius?: string
-  color?: string
-  backgroundColor?: string
+  children: ReactNode
+  size: 'small' | 'large'
+  primary?: boolean
   onClick?: () => void
 }
 
-const Button = ({
-  type,
-  text,
-  margin,
-  width,
-  height,
-  fontSize,
-  border,
-  color,
-  borderRadius,
-  backgroundColor,
-  onClick,
-}: IButtonProps) => {
-  const buttonStyles = {
-    text,
-    margin,
-    width,
-    height,
-    fontSize,
-    border,
-    color,
-    borderRadius,
-    backgroundColor,
-  }
-
+export const Button = ({ type, children, size, primary, onClick }: IButtonProps) => {
   return (
     // eslint-disable-next-line react/button-has-type
-    <button type={type} style={buttonStyles} onClick={onClick}>
-      {text}
+    <button type={type} className={cx(styles.button, styles[size], { [styles.primary]: primary })} onClick={onClick}>
+      {children}
     </button>
   )
 }
-
-export default Button
