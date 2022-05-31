@@ -1,5 +1,5 @@
 interface IButtonProps {
-  type?: 'button' | 'submit'
+  type: 'button' | 'submit' | 'reset'
   margin?: string
   text?: string
   width?: string
@@ -14,14 +14,14 @@ interface IButtonProps {
 
 const Button = ({
   type,
-  margin,
   text,
+  margin,
   width,
   height,
   fontSize,
   border,
-  borderRadius,
   color,
+  borderRadius,
   backgroundColor,
   onClick,
 }: IButtonProps) => {
@@ -38,7 +38,8 @@ const Button = ({
   }
 
   return (
-    <button type={type === 'button' ? 'button' : 'submit'} style={buttonStyles} onClick={onClick}>
+    // eslint-disable-next-line react/button-has-type
+    <button type={type} style={buttonStyles} onClick={onClick}>
       {text}
     </button>
   )
