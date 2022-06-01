@@ -1,14 +1,19 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { DateRange, Range } from 'react-date-range'
 import dayjs from 'dayjs'
 import ko from 'date-fns/locale/ko'
 
+import { Button } from '../Button'
 import styles from './datePickerModal.module.scss'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-import { Button } from '../Button'
 
-const DatePickerModal = () => {
+interface IProps {
+  setWeeks: Dispatch<SetStateAction<string[]>>
+  setIsDatePickerOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const DatePickerModal = ({ setWeeks, setIsDatePickerOpen }: IProps) => {
   const today = new Date()
   const [dateRange, setDateRange] = useState<Range[]>([
     {
@@ -18,14 +23,20 @@ const DatePickerModal = () => {
     },
   ])
 
-  console.log(dayjs(dateRange[0].startDate).format('YYYY-MM-DD'))
-  console.log(dayjs(dateRange[0].endDate).format('YYYY-MM-DD'))
+  const handleCloseDatePickerModal = () => {
+    setIsDatePickerOpen(false)
+  }
+
+  const handleSetPickedDateRange = () => {
+    setWeeks([dayjs(dateRange[0].startDate).format('YYYY-MM-DD'), dayjs(dateRange[0].endDate).format('YYYY-MM-DD')])
+    setIsDatePickerOpen(false)
+  }
 
   return (
     <aside className={styles.container}>
       <section className={styles.calendarContainer}>
         <DateRange
-          editableDateInputs
+          editableDateInputs={false}
           onChange={(item) => setDateRange([item.selection])}
           ranges={dateRange}
           locale={ko}
@@ -36,11 +47,14 @@ const DatePickerModal = () => {
           showPreview={false}
           monthDisplayFormat='yyyy년 MM월'
           rangeColors={['#586cf5']}
+          showDateDisplay={false}
         />
       </section>
       <section className={styles.buttonContainer}>
-        <Button size='large'>취소</Button>
-        <Button size='large' primary>
+        <Button size='large' onClick={handleCloseDatePickerModal}>
+          취소
+        </Button>
+        <Button size='large' primary onClick={handleSetPickedDateRange}>
           적용
         </Button>
       </section>
