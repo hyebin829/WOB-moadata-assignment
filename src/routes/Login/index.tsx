@@ -14,7 +14,7 @@ const UserManage = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
-  const [checked, setChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
 
   const navigate = useNavigate()
 
@@ -36,11 +36,8 @@ const UserManage = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (checkValidation(adminId, password) && checked) {
-      sessionStorage.setItem('admin', adminId)
-      store.set('admin', adminId)
-      navigate('/')
-    } else if (checkValidation(adminId, password)) {
+    if (checkValidation(adminId, password)) {
+      isChecked ? store.set('admin', adminId) : store.remove('admin')
       sessionStorage.setItem('admin', adminId)
       navigate('/')
     } else {
@@ -49,7 +46,7 @@ const UserManage = () => {
   }
 
   const handleCheck = () => {
-    setChecked((prev) => !prev)
+    setIsChecked((prev) => !prev)
   }
 
   const closeMessage = () => {
@@ -87,7 +84,7 @@ const UserManage = () => {
           </div>
           <div className={styles.extraFeaturesWrapper}>
             <label>
-              <input type='checkbox' checked={checked} onChange={handleCheck} /> Remember Me
+              <input type='checkbox' checked={isChecked} onChange={handleCheck} /> Remember Me
             </label>
           </div>
           {errorMessage && <div className={styles.floatingMsg}>Wrong password or ID. Try again</div>}
