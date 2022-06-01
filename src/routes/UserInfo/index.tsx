@@ -1,3 +1,4 @@
+import StepRate from './StepRate'
 import styles from './userInfo.module.scss'
 
 const UserInfo = () => {
