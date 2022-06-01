@@ -11,7 +11,7 @@ const checkValidation = (id: string, password: string) => {
   const passwordArray = adminData.map((item) => item.password)
 
   let isValid = false
-  idArray.map((item, index) => {
+  idArray.forEach((item, index) => {
     if (item === id && password === passwordArray[index]) {
       isValid = true
     }
