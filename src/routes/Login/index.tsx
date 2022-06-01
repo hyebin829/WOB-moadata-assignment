@@ -12,8 +12,8 @@ const UserManage = () => {
   const [adminId, setAdminId] = useState('')
   const [password, setPassword] = useState('')
 
-  const [showPassword, setShowPassword] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [isError, setIsError] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
 
   const navigate = useNavigate()
@@ -26,12 +26,12 @@ const UserManage = () => {
 
   const handleIdInput = (e: ChangeEvent<HTMLInputElement>) => {
     setAdminId(e.currentTarget.value)
-    setErrorMessage(false)
+    setIsError(false)
   }
 
   const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value)
-    setErrorMessage(false)
+    setIsError(false)
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -41,7 +41,7 @@ const UserManage = () => {
       sessionStorage.setItem('admin', adminId)
       navigate('/')
     } else {
-      setErrorMessage(true)
+      setIsError(true)
     }
   }
 
@@ -50,11 +50,11 @@ const UserManage = () => {
   }
 
   const closeMessage = () => {
-    setErrorMessage(false)
+    setIsError(false)
   }
 
   const toggleVisiblePw = () => {
-    setShowPassword(!showPassword)
+    setIsVisible((prev) => !prev)
   }
 
   return (
@@ -72,11 +72,11 @@ const UserManage = () => {
             <label htmlFor='password'>password</label>
             <input
               value={password}
-              type={showPassword ? 'text' : 'password'}
+              type={isVisible ? 'text' : 'password'}
               name='password'
               onChange={handlePasswordInput}
             />
-            {showPassword ? (
+            {isVisible ? (
               <FaEye className={styles.faEyeIcon} onClick={toggleVisiblePw} />
             ) : (
               <FaEyeSlash className={styles.faEyeIcon} onClick={toggleVisiblePw} />
@@ -87,13 +87,13 @@ const UserManage = () => {
               <input type='checkbox' checked={isChecked} onChange={handleCheck} /> Remember Me
             </label>
           </div>
-          {errorMessage && <div className={styles.floatingMsg}>Wrong password or ID. Try again</div>}
+          {isError && <div className={styles.floatingMsg}>Wrong password or ID. Try again</div>}
           <button className={styles.loginBtn} type='submit'>
             login
           </button>
         </form>
       </div>
-      {errorMessage && (
+      {isError && (
         <div className={styles.notificationPopUpContainer}>
           {/* 팝업메시지 컴포넌트화 시켜서 로그인 실패시 로그인 화면에서 해당 팝업메시지 fade in x클릭시 out, 로그인 성공시 홈화면에서, 로그아웃시 로그인화면에서 구현하면 될듯싶네요 */}
           <div className={styles.popUpMsg}>
