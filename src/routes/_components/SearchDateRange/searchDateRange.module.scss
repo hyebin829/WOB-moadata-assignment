@@ -2,10 +2,10 @@
 @use '/src/styles/mixins/flexbox';
 
 .container {
-  position: relative;
   @include flexbox.flexbox(center, center);
+  position: relative;
+  z-index: 1000;
   gap: 20px;
-  width: 100%;
 }
 
 .inputs {
@@ -21,9 +21,15 @@
     width: 40%;
     height: 40px;
     font-size: 16px;
+    color: colors.$TRANSPARENT;
     text-align: center;
+    text-shadow: 0 0 0 black;
     border: 1px solid colors.$GRAYA;
     border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -41,8 +47,6 @@
   flex-wrap: nowrap;
 }
 
-.datePicker {
-  position: absolute;
-  top: 50px;
-  left: 100px;
+.dateRange {
+  height: 400px;
 }
