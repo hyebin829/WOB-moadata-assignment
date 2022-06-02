@@ -9,7 +9,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     sessionStorage.removeItem('admin')
-    navigate('/login')
+    navigate('login')
   }
 
   return (
