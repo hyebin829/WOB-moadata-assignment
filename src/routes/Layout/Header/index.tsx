@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import store from 'store'
 
 import { Alarm, Profile } from 'assets/svgs'
 import Breadcrumb from './Breadcrumb'
@@ -9,6 +10,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     sessionStorage.removeItem('admin')
+    store.remove('admin')
     navigate('login')
   }
 
