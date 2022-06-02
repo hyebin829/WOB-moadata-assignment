@@ -55,14 +55,14 @@ const DatePickerModal = ({ setWeeks, setIsDatePickerOpen, setStartDate, setEndDa
           rangeColors={['#586cf5']}
           showDateDisplay={false}
         />
-      </section>
-      <section className={styles.buttonContainer}>
-        <Button size='large' onClick={handleCloseDatePickerModal}>
-          취소
-        </Button>
-        <Button size='large' primary onClick={handleSetPickedDateRange}>
-          적용
-        </Button>
+        <div className={styles.buttonContainer}>
+          <Button size='large' onClick={handleCloseDatePickerModal}>
+            취소
+          </Button>
+          <Button size='large' primary onClick={handleSetPickedDateRange}>
+            적용
+          </Button>
+        </div>
       </section>
     </aside>
   )
