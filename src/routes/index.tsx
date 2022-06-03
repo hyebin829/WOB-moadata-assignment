@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-import { Routes, Route, useNavigate } from 'react-router-dom'
-=======
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
->>>>>>> 9c6d9ac97ce82057ab5b7b51bf6eaa67ff3739e3
+import store from 'store'
 
 import LoginPage from './Login'
 import HomePage from './Home'
@@ -17,7 +14,7 @@ const App = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isLogin) navigate('login')
+    if (!isLogin && !store.get('admin')) navigate('login')
   }, [isLogin, navigate])
 
   return (
