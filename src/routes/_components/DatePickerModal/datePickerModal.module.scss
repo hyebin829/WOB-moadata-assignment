@@ -19,6 +19,7 @@
 }
 
 .buttonContainer {
+  z-index: 1;
   display: flex;
   gap: 10px;
   justify-content: flex-end;
